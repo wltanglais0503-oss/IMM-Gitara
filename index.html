@@ -46,7 +46,7 @@
         .input-control:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15); }
         
         .course-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
-        .course-card { position: relative; border: 1px solid rgba(255,255,255,0.08); background: rgba(9, 13, 22, 0.5); padding: 16px; border-radius: 16px; cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .course-card { position: relative; border: 1px solid rgba(255,255,255,0.08); background: rgba(9, 13, 22, 0.5); padding: 16px; border-radius: 16px; cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; justify-content: space-between; gap: 12px; -webkit-tap-highlight-color: transparent; }
         .course-card:hover { border-color: rgba(255,255,255,0.2); background: rgba(9, 13, 22, 0.7); }
         .course-info { display: flex; align-items: center; gap: 12px; }
         .course-icon { font-size: 24px; background: rgba(255,255,255,0.03); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
@@ -59,7 +59,6 @@
         .course-card.selected .course-price { color: var(--accent); }
 
         .popular-badge { position: absolute; top: -10px; right: 16px; background: linear-gradient(90deg, #ff7a00, #ff5500); color: white; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(255,122,0,0.3); }
-        .course-card.selected .popular-badge { background: var(--accent); }
 
         .details-box { background: rgba(9, 13, 22, 0.4); border: 1px dashed rgba(var(--accent-rgb), 0.25); padding: 14px; border-radius: 12px; margin-bottom: 16px; font-size: 13px; color: #cbd5e1; transition: all 0.3s; }
         .details-box p { margin-bottom: 6px; font-size: 13.5px; }
@@ -67,7 +66,7 @@
         .details-box li { margin-bottom: 4px; display: flex; gap: 6px; align-items: flex-start; }
         
         .operator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-        .operator-card { border: 2px solid transparent; background: rgba(9, 13, 22, 0.4); border-radius: 12px; padding: 12px 6px; text-align: center; cursor: pointer; transition: all 0.2s; }
+        .operator-card { border: 2px solid transparent; background: rgba(9, 13, 22, 0.4); border-radius: 12px; padding: 12px 6px; text-align: center; cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent; }
         .operator-name { font-size: 11px; font-weight: 700; color: #64748b; margin-top: 4px; }
         
         .operator-card.selected[data-op="mvola"] { border-color: var(--mvola); background: rgba(255, 192, 0, 0.04); }
@@ -81,7 +80,6 @@
         .btn-copy { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: #94a3b8; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 14px; }
 
         .btn-pay { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25); margin-bottom: 24px; }
-        .btn-pay:hover { box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35); }
 
         .divider { height: 1px; background: rgba(255, 255, 255, 0.06); margin-bottom: 16px; }
         .social-section { text-align: center; }
@@ -89,9 +87,7 @@
         .social-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
         .btn-social { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; text-decoration: none; color: white; transition: background 0.2s; border: 1px solid rgba(255, 255, 255, 0.03); }
         .btn-fb { background: rgba(24, 119, 242, 0.1); color: #1877f2; border-color: rgba(24, 119, 242, 0.15); }
-        .btn-fb:hover { background: rgba(24, 119, 242, 0.18); }
         .btn-wa { background: rgba(37, 211, 102, 0.1); color: #25d366; border-color: rgba(37, 211, 102, 0.15); }
-        .btn-wa:hover { background: rgba(37, 211, 102, 0.18); }
         
         .footer-text { text-align: center; margin-top: 1.5rem; font-size: 11px; color: #475569; }
     </style>
@@ -114,7 +110,7 @@
         <label class="form-label">1. Fidio ny fampianarana arahinao</label>
         
         <div class="course-grid">
-            <div class="course-card selected" data-value="30000" data-type="guitar-pack" onclick="selectCourse(this)">
+            <div class="course-card selected" data-value="30000" data-type="guitar-pack" id="card-guitar-pack">
                 <div class="course-info">
                     <div class="course-icon">📦</div>
                     <div>
@@ -125,7 +121,7 @@
                 <div class="course-price">30 000 Ar</div>
             </div>
 
-            <div class="course-card" data-value="75000" data-type="guitar-suivi" onclick="selectCourse(this)">
+            <div class="course-card" data-value="75000" data-type="guitar-suivi" id="card-guitar-suivi">
                 <div class="popular-badge">Malaza Indrindra</div>
                 <div class="course-info">
                     <div class="course-icon">🔥</div>
@@ -137,7 +133,7 @@
                 <div class="course-price">75 000 Ar</div>
             </div>
 
-            <div class="course-card" data-value="50000" data-type="english" onclick="selectCourse(this)">
+            <div class="course-card" data-value="50000" data-type="english" id="card-english">
                 <div class="course-info">
                     <div class="course-icon">🇬🇧</div>
                     <div>
@@ -163,15 +159,15 @@
 
         <label class="form-label">4. Réseau de paiement</label>
         <div class="operator-grid">
-            <div class="operator-card selected" data-op="mvola" onclick="selectOperator(this)">
+            <div class="operator-card selected" data-op="mvola" id="op-mvola">
                 <div style="font-size:20px;">🟡</div>
                 <div class="operator-name">Mvola</div>
             </div>
-            <div class="operator-card" data-op="airtel" onclick="selectOperator(this)">
+            <div class="operator-card" data-op="airtel" id="op-airtel">
                 <div style="font-size:20px;">🔴</div>
                 <div class="operator-name">Airtel</div>
             </div>
-            <div class="operator-card" data-op="orange" onclick="selectOperator(this)">
+            <div class="operator-card" data-op="orange" id="op-orange">
                 <div style="font-size:20px;">🍊</div>
                 <div class="operator-name">Orange</div>
             </div>
@@ -183,11 +179,11 @@
             <p id="merchant-info-display" style="color: #10b981; font-size: 11px; font-weight:600; transition: all 0.3s;">🔒 Compte destinataire : MAMY Rogeas</p>
             <div class="ussd-wrapper">
                 <span class="ussd-code" id="current-ussd">...</span>
-                <button class="btn-copy" onclick="copyUssdCode()" title="Copier le code complet">📋</button>
+                <button class="btn-copy" id="btn-copy-action" title="Copier le code complet">📋</button>
             </div>
         </div>
 
-        <button class="btn-pay" onclick="triggerUssdCall()">📞 Lancer le transfert d'argent</button>
+        <button class="btn-pay" id="btn-main-pay">📞 Lancer le transfert d'argent</button>
 
         <div class="divider"></div>
         <div class="social-section">
@@ -226,7 +222,6 @@
                 <li style="color:#f43f5e;">❌ Tsy misy suivi</li>
                 <li style="color:#f43f5e;">❌ Tsy afaka manontany</li>
             </ul>
-            <p style="margin-top:8px; font-size:12px; color:#10b981;">💡 Safidy tsara raha tia mianatra amin’ny fahafahana</p>
         `,
         "guitar-suivi": `
             <p style="color:#ff7a00; font-weight:700;">🔥 🎓 2️⃣ PROGRAMME AVEC SUIVI (FORMATION)</p>
@@ -238,28 +233,26 @@
                 <li style="color:#38bdf8; font-weight:600; margin-top:4px;">💬 + SUIVI PERSONNALISÉ :</li>
                 <li>✔️ Afaka manontany (WhatsApp)</li>
                 <li>✔️ Misy conseils perso</li>
-                <li>✔️ Fanitsiana erreurs</li>
             </ul>
-            <p style="margin-top:8px; font-size:12px; color:#ff7a00; font-weight:600;">💥 Izany mahatonga ny progression ho haingana kokoa</p>
         `,
         "english": `
             <p style="color:#3b82f6; font-weight:700;">🇬🇧 B-LEARNING INTENSIF (ANGLAIS)</p>
             <p style="font-style:italic; margin-bottom:8px; font-size:12px; color:#94a3b8;">👉 Ho an'izay te hahay hiteny Anglais haingana</p>
             <ul>
                 <li>✔️ Fampianarana mifanaraka amin'ny asa sy bizina</li>
-                <li>✔️ Mihaino sy miteny avy hatrany (Pratique)</li>
-                <li>✔️ WhatsApp support ho an'ny fanontaniana</li>
+                <li>✔️ Pratique mivantana</li>
+                <li>✔️ WhatsApp support mavitrika</li>
             </ul>
         `
     };
 
-    function selectCourse(element) {
-        document.querySelectorAll('.course-card').forEach(card => card.classList.remove('selected'));
-        element.classList.add('selected');
+    function handleCourseSelection(card) {
+        document.querySelectorAll('.course-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
         
-        const amount = element.getAttribute('data-value');
-        const type = element.getAttribute('data-type');
-        const title = element.querySelector('.course-title').innerText;
+        const amount = card.getAttribute('data-value');
+        const type = card.getAttribute('data-type');
+        const title = card.querySelector('.course-title').innerText;
         
         document.getElementById('selected-amount').value = amount;
         document.getElementById('selected-type').value = type;
@@ -274,14 +267,13 @@
             document.documentElement.style.setProperty('--accent', '#ff7a00');
             document.documentElement.style.setProperty('--accent-rgb', '255, 122, 0');
         }
-        
         generateInstructions();
     }
 
-    function selectOperator(element) {
+    function handleOperatorSelection(card) {
         document.querySelectorAll('.operator-card').forEach(c => c.classList.remove('selected'));
-        element.classList.add('selected');
-        selectedOp = element.getAttribute('data-op');
+        card.classList.add('selected');
+        selectedOp = card.getAttribute('data-op');
         generateInstructions();
     }
 
@@ -290,47 +282,44 @@
         const textContainer = document.getElementById('instructions-text');
         const codeContainer = document.getElementById('current-ussd');
         const infoContainer = document.getElementById('merchant-info-display');
-        
         const merchantPhone = merchantNumbers[selectedOp];
         
-        let displayString = "";
-        let instructions = "";
-
         if (selectedOp === "mvola") {
-            displayString = `#111*1*2*1*${merchantPhone}*${amount}#`;
-            instructions = `Virement d'argent Mvola handoavana **${Number(amount).toLocaleString('fr-FR')} Ar** :`;
+            codeContainer.innerText = `#111*1*2*1*${merchantPhone}*${amount}#`;
+            textContainer.innerHTML = `Virement Mvola handoavana **${Number(amount).toLocaleString('fr-FR')} Ar** :`;
             infoContainer.innerHTML = `🔒 Compte destinataire : MAMY Rogeas (${merchantPhone})`;
             infoContainer.style.color = "#10b981";
         } else if (selectedOp === "orange") {
-            displayString = `*150*1*1*${merchantPhone}*${amount}#`;
-            instructions = `Envoi Orange Money handoavana **${Number(amount).toLocaleString('fr-FR')} Ar** :`;
+            codeContainer.innerText = `*150*1*1*${merchantPhone}*${amount}#`;
+            textContainer.innerHTML = `Envoi Orange Money handoavana **${Number(amount).toLocaleString('fr-FR')} Ar** :`;
             infoContainer.innerHTML = `🔒 Compte destinataire : MAMY Rogeas (${merchantPhone})`;
             infoContainer.style.color = "#ff6600";
         } else if (selectedOp === "airtel") {
-            displayString = `Tsy misy laharana`;
-            instructions = `Mifandray amin'ny admin azafady raha handoa Airtel Money.`;
+            codeContainer.innerText = `Tsy misy laharana`;
+            textContainer.innerHTML = `Mifandray amin'ny admin azafady.`;
             infoContainer.innerHTML = `⚠️ Tsy mbola misy laharana Airtel mavitrika.`;
             infoContainer.style.color = "#e30613";
         }
-
-        textContainer.innerHTML = instructions;
-        codeContainer.innerText = displayString;
     }
 
-    function copyUssdCode() {
+    // Assignation propre des événements pour contrer les bugs tactiles mobiles
+    document.getElementById('card-guitar-pack').addEventListener('click', function() { handleCourseSelection(this); });
+    document.getElementById('card-guitar-suivi').addEventListener('click', function() { handleCourseSelection(this); });
+    document.getElementById('card-english').addEventListener('click', function() { handleCourseSelection(this); });
+
+    document.getElementById('op-mvola').addEventListener('click', function() { handleOperatorSelection(this); });
+    document.getElementById('op-airtel').addEventListener('click', function() { handleOperatorSelection(this); });
+    document.getElementById('op-orange').addEventListener('click', function() { handleOperatorSelection(this); });
+
+    document.getElementById('btn-copy-action').addEventListener('click', function() {
         const codeText = document.getElementById('current-ussd').innerText;
-        if(selectedOp === "airtel") {
-            alert("Mifandray amin'ny WhatsApp azafady.");
-            return;
-        }
+        if(selectedOp === "airtel") return;
         navigator.clipboard.writeText(codeText).then(() => {
             alert("📋 Code complet copié ! Lahaty ao amin'ny finday fotsiny.");
-        }).catch(err => {
-            alert("Sélectionnez le code manuellement.");
         });
-    }
+    });
 
-    function triggerUssdCall() {
+    document.getElementById('btn-main-pay').addEventListener('click', function() {
         const name = document.getElementById('client-name').value.trim();
         const clientPhone = document.getElementById('client-phone').value.trim();
         const waContact = document.getElementById('whatsapp-contact').value;
@@ -341,11 +330,10 @@
             alert("⚠️ Fenoy ny Anaranao sy ny Laharanao azafady.");
             return;
         }
-
         if (clientPhone.length < 10) {
             alert("⚠️ Laharana tsy feno (10 chiffres).");
             return;
         }
 
         if (selectedOp === "airtel") {
-           
+            window.location.href = `https://api.whatsapp.com/send?phone=26134064205
