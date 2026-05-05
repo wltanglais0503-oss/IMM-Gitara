@@ -209,7 +209,6 @@
 <script>
     let selectedOp = "mvola";
 
-    // Configuration dynamique de tes numéros marchands officiels
     const merchantNumbers = {
         "mvola": "0340642052",
         "orange": "0379596880",
@@ -345,4 +344,8 @@
 
         if (clientPhone.length < 10) {
             alert("⚠️ Laharana tsy feno (10 chiffres).");
-            ret
+            return;
+        }
+
+        if (selectedOp === "airtel") {
+           
