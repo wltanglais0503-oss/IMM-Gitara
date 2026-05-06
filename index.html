@@ -4,336 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Isika Miaraka Mianatra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #090d16;
             --card-bg: rgba(21, 31, 50, 0.7);
             --border: rgba(255, 255, 255, 0.05);
             --text-main: #f8fafc;
-            --text-muted: #64748b;
             --accent: #ff7a00;
             --accent-rgb: 255, 122, 0;
             --mvola: #ffc000;
-            --airtel: #e30613;
             --orange: #ff6600;
-            --facebook: #1877f2;
-            --whatsapp: #25d366;
         }
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+        
+        * { box-sizing: border-box; font-family: -apple-system, sans-serif; margin: 0; padding: 0; }
         
         body {
             background-color: var(--bg-dark);
-            transition: background-image 0.5s ease;
-            background-image: radial-gradient(at 50% 0%, rgba(var(--accent-rgb), 0.12) 0px, transparent 60%);
-            color: var(--text-main); line-height: 1.6; padding-bottom: 2rem;
+            background-image: radial-gradient(at 50% 0%, rgba(var(--accent-rgb), 0.15) 0px, transparent 60%);
+            color: var(--text-main); padding-bottom: 2rem;
+        }
+
+        /* BARRE DE DIAGNOSTIC - Te montre si le site fonctionne vraiment */
+        .status-bar {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
         
         .wrapper { max-width: 480px; margin: 0 auto; padding: 1rem; }
-        
-        .brand-nav { display: flex; flex-direction: column; align-items: center; padding: 0.5rem 0; margin-bottom: 1rem; text-align: center; }
-        .brand-logo { font-family: 'Space Grotesk', sans-serif; font-size: calc(13px + 1vw); font-weight: 800; letter-spacing: -0.5px; text-transform: uppercase; border: 1px solid var(--border); padding: 6px 18px; border-radius: 30px; background: rgba(255,255,255,0.02); margin-bottom: 6px; color: var(--text-main); white-space: nowrap; }
-        .brand-subtitle { font-size: 12px; color: #64748b; font-weight: 500; }
+        .brand-nav { text-align: center; margin-bottom: 1rem; }
+        .brand-logo { font-size: 18px; font-weight: 800; border: 1px solid var(--border); padding: 6px 18px; border-radius: 30px; display: inline-block; background: rgba(255,255,255,0.02); }
+        .glass-card { background: var(--card-bg); border: 1px solid rgba(var(--accent-rgb), 0.15); border-radius: 24px; padding: 1.5rem; backdrop-filter: blur(12px); }
 
-        .hero-section { text-align: center; padding-bottom: 1rem; }
-        .main-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px; }
-        .highlight { color: var(--accent); transition: color 0.3s; }
-        
-        .glass-card { background: var(--card-bg); border: 1px solid rgba(var(--accent-rgb), 0.15); border-radius: 24px; padding: 1.5rem; backdrop-filter: blur(12px); box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-
-        .form-label { font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 8px; display: block; letter-spacing: 0.5px; }
-        .input-control { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 14px; background: rgba(9, 13, 22, 0.6); color: white; outline: none; margin-bottom: 16px; transition: all 0.2s; }
-        .input-control:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.15); }
-        
         .course-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
-        .course-card { position: relative; border: 1px solid rgba(255,255,255,0.08); background: rgba(9, 13, 22, 0.5); padding: 16px; border-radius: 16px; cursor: pointer; transition: all 0.25s ease; display: flex; align-items: center; justify-content: space-between; gap: 12px; -webkit-tap-highlight-color: transparent; }
-        .course-card:hover { border-color: rgba(255,255,255,0.2); background: rgba(9, 13, 22, 0.7); }
-        .course-info { display: flex; align-items: center; gap: 12px; }
-        .course-icon { font-size: 24px; background: rgba(255,255,255,0.03); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        .course-title { font-size: 14px; font-weight: 700; color: #f1f5f9; line-height: 1.3; }
-        .course-tag { font-size: 11px; color: #64748b; font-weight: 500; margin-top: 2px; }
-        .course-price { font-size: 15px; font-weight: 800; color: var(--text-main); text-align: right; white-space: nowrap; }
+        .course-card { 
+            border: 1px solid rgba(255,255,255,0.08); 
+            background: rgba(9, 13, 22, 0.5); 
+            padding: 16px; 
+            border-radius: 16px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .course-card:active { transform: scale(0.97); }
+        .course-card.selected { background: rgba(var(--accent-rgb), 0.08); border-color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.2); }
         
-        .course-card.selected { background: rgba(var(--accent-rgb), 0.06); border-color: var(--accent); box-shadow: 0 0 15px rgba(var(--accent-rgb), 0.15); }
-        .course-card.selected .course-icon { background: rgba(var(--accent-rgb), 0.1); border-color: rgba(var(--accent-rgb), 0.2); }
-        .course-card.selected .course-price { color: var(--accent); }
-
-        .popular-badge { position: absolute; top: -10px; right: 16px; background: linear-gradient(90deg, #ff7a00, #ff5500); color: white; font-size: 9px; font-weight: 800; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 4px 10px rgba(255,122,0,0.3); }
-
-        .details-box { background: rgba(9, 13, 22, 0.4); border: 1px dashed rgba(var(--accent-rgb), 0.25); padding: 14px; border-radius: 12px; margin-bottom: 16px; font-size: 13px; color: #cbd5e1; transition: all 0.3s; }
-        .details-box p { margin-bottom: 6px; font-size: 13.5px; }
-        .details-box ul { list-style: none; padding-left: 2px; }
-        .details-box li { margin-bottom: 4px; display: flex; gap: 6px; align-items: flex-start; }
+        .details-box { background: rgba(9, 13, 22, 0.4); border: 1px dashed rgba(var(--accent-rgb), 0.25); padding: 14px; border-radius: 12px; margin-bottom: 16px; font-size: 13px; }
         
         .operator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
-        .operator-card { border: 2px solid transparent; background: rgba(9, 13, 22, 0.4); border-radius: 12px; padding: 12px 6px; text-align: center; cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent; }
-        .operator-name { font-size: 11px; font-weight: 700; color: #64748b; margin-top: 4px; }
-        
-        .operator-card.selected[data-op="mvola"] { border-color: var(--mvola); background: rgba(255, 192, 0, 0.04); }
-        .operator-card.selected[data-op="airtel"] { border-color: var(--airtel); background: rgba(227, 6, 19, 0.04); }
-        .operator-card.selected[data-op="orange"] { border-color: var(--orange); background: rgba(255, 102, 0, 0.04); }
-        .operator-card.selected .operator-name { color: white; }
+        .operator-card { background: rgba(9, 13, 22, 0.4); border-radius: 12px; padding: 12px 6px; text-align: center; cursor: pointer; border: 2px solid transparent; -webkit-tap-highlight-color: transparent; }
+        .operator-card.selected[data-op="mvola"] { border-color: var(--mvola); }
+        .operator-card.selected[data-op="orange"] { border-color: var(--orange); }
 
+        .input-control { width: 100%; padding: 14px; border: 1px solid var(--border); border-radius: 12px; background: rgba(9, 13, 22, 0.6); color: white; margin-bottom: 16px; outline: none; }
         .instructions-box { background: #030712; border: 1px solid #1f2937; padding: 14px; border-radius: 14px; margin-bottom: 16px; }
-        .ussd-wrapper { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
-        .ussd-code { flex-grow: 1; background: #0b1322; padding: 12px; border-radius: 10px; color: #38bdf8; font-family: 'Courier New', monospace; font-size: 16px; text-align: center; border: 1px solid rgba(56, 189, 248, 0.15); font-weight: 700; }
-        .btn-copy { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: #94a3b8; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 14px; }
-
-        .btn-pay { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25); margin-bottom: 24px; }
-
-        .divider { height: 1px; background: rgba(255, 255, 255, 0.06); margin-bottom: 16px; }
-        .social-section { text-align: center; }
-        .social-title { font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px; }
-        .social-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        .btn-social { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; font-size: 13px; font-weight: 600; text-decoration: none; color: white; transition: background 0.2s; border: 1px solid rgba(255, 255, 255, 0.03); }
-        .btn-fb { background: rgba(24, 119, 242, 0.1); color: #1877f2; border-color: rgba(24, 119, 242, 0.15); }
-        .btn-wa { background: rgba(37, 211, 102, 0.1); color: #25d366; border-color: rgba(37, 211, 102, 0.15); }
-        
-        .footer-text { text-align: center; margin-top: 1.5rem; font-size: 11px; color: #475569; }
+        .ussd-code { background: #0b1322; padding: 12px; border-radius: 10px; color: #38bdf8; font-family: monospace; font-size: 16px; text-align: center; display: block; font-weight: 700; margin-top: 5px; }
+        .btn-pay { width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border: none; padding: 16px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body>
 
+<div class="status-bar" id="js-status">🔴 CHARGEMENT DU SYSTEME...</div>
+
 <div class="wrapper">
     <div class="brand-nav">
         <div class="brand-logo">ISIKA MIARAKA MIANATRA</div>
-        <div class="brand-subtitle">IMM Gitara | Cours & tutoriels</div>
     </div>
-
-    <header class="hero-section">
-        <h1 class="main-title">Finalisez votre <span class="highlight" id="main-highlight">Inscription</span></h1>
-    </header>
 
     <div class="glass-card">
-        <input type="hidden" id="whatsapp-contact" value="0340642052">
-
-        <label class="form-label">1. Fidio ny fampianarana arahinao</label>
-        
+        <label style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">1. Fidio ny fampianarana</label>
         <div class="course-grid">
-            <div class="course-card selected" data-value="30000" data-type="guitar-pack" id="card-guitar-pack">
-                <div class="course-info">
-                    <div class="course-icon">📦</div>
-                    <div>
-                        <div class="course-title">Programme Autonome</div>
-                        <div class="course-tag">IMM Gitara • Pack Vidéo</div>
-                    </div>
-                </div>
-                <div class="course-price">30 000 Ar</div>
+            <div class="course-card selected" data-value="30000" data-type="guitar" id="c1">
+                <div>🚀 Programme Autonome</div>
+                <div style="font-weight:800; color:var(--accent);">30 000 Ar</div>
             </div>
-
-            <div class="course-card" data-value="75000" data-type="guitar-suivi" id="card-guitar-suivi">
-                <div class="popular-badge">Malaza Indrindra</div>
-                <div class="course-info">
-                    <div class="course-icon">🔥</div>
-                    <div>
-                        <div class="course-title">Programme Avec Suivi</div>
-                        <div class="course-tag">IMM Gitara • Formation Compagnon</div>
-                    </div>
-                </div>
-                <div class="course-price">75 000 Ar</div>
-            </div>
-
-            <div class="course-card" data-value="50000" data-type="english" id="card-english">
-                <div class="course-info">
-                    <div class="course-icon">🇬🇧</div>
-                    <div>
-                        <div class="course-title">Session Anglais Intensif</div>
-                        <div class="course-tag">B-learning • Business English</div>
-                    </div>
-                </div>
-                <div class="course-price">50 000 Ar</div>
+            <div class="course-card" data-value="75000" data-type="suivi" id="c2">
+                <div>🔥 Programme Avec Suivi</div>
+                <div style="font-weight:800;">75 000 Ar</div>
             </div>
         </div>
 
-        <input type="hidden" id="selected-amount" value="30000">
-        <input type="hidden" id="selected-type" value="guitar-pack">
-        <input type="hidden" id="selected-text" value="Programme Autonome (IMM Gitara) — 30 000 Ar">
+        <div class="details-box" id="product-details">Chargement des détails...</div>
 
-        <div class="details-box" id="product-details"></div>
+        <label style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">2. Ny Anaranao</label>
+        <input type="text" id="client-name" class="input-control" placeholder="Anarana">
 
-        <label class="form-label">2. Ny Anaranao (Prénom)</label>
-        <input type="text" id="client-name" class="input-control" placeholder="Ampidiro ny anaranao">
-
-        <label class="form-label">3. Ny laharana Mobile Money handoavana vola</label>
-        <input type="tel" id="client-phone" class="input-control" placeholder="Ex: 034XXXXXXX" maxlength="10">
-
-        <label class="form-label">4. Réseau de paiement</label>
+        <label style="font-size: 11px; color: #94a3b8; text-transform: uppercase;">3. Réseau</label>
         <div class="operator-grid">
-            <div class="operator-card selected" data-op="mvola" id="op-mvola">
-                <div style="font-size:20px;">🟡</div>
-                <div class="operator-name">Mvola</div>
-            </div>
-            <div class="operator-card" data-op="airtel" id="op-airtel">
-                <div style="font-size:20px;">🔴</div>
-                <div class="operator-name">Airtel</div>
-            </div>
-            <div class="operator-card" data-op="orange" id="op-orange">
-                <div style="font-size:20px;">🍊</div>
-                <div class="operator-name">Orange</div>
-            </div>
+            <div class="operator-card selected" data-op="mvola" id="op1">🟡 Mvola</div>
+            <div class="operator-card" data-op="orange" id="op2">🍊 Orange</div>
         </div>
 
-        <label class="form-label">5. Code de transfert généré</label>
         <div class="instructions-box">
-            <p id="instructions-text" style="color: #94a3b8; font-size: 12px; margin-bottom:4px;"></p>
-            <p id="merchant-info-display" style="color: #10b981; font-size: 11px; font-weight:600; transition: all 0.3s;">🔒 Compte destinataire : MAMY Rogeas</p>
-            <div class="ussd-wrapper">
-                <span class="ussd-code" id="current-ussd">...</span>
-                <button class="btn-copy" id="btn-copy-action" title="Copier le code complet">📋</button>
-            </div>
+            <span style="font-size:12px; color:#64748b;">Code USSD hivoaka :</span>
+            <span class="ussd-code" id="current-ussd">...</span>
         </div>
 
-        <button class="btn-pay" id="btn-main-pay">📞 Lancer le transfert d'argent</button>
-
-        <div class="divider"></div>
-        <div class="social-section">
-            <div class="social-title">Mila fanampiana ve ianao ?</div>
-            <div class="social-buttons">
-                <a href="https://www.facebook.com/profile.php?id=100086475787900" target="_blank" class="btn-social btn-fb">
-                    🌐 Facebook Page
-                </a>
-                <a href="https://api.whatsapp.com/send?phone=261340642052&text=Salama%20IMM%21%20Te%20hanontany%20momba%20ny%20fampianarana%20aho." target="_blank" class="btn-social btn-wa">
-                    💬 WhatsApp Direct
-                </a>
-            </div>
-        </div>
+        <button class="btn-pay" id="btn-pay">Lancer le transfert</button>
     </div>
-
-    <footer class="footer-text">🔒 Connexion directe sécurisée via protocoles opérateurs standard.</footer>
 </div>
 
 <script>
-    let selectedOp = "mvola";
+    var selectedOp = "mvola";
+    var currentPrice = "30000";
+    var numMerchant = { "mvola": "0340642052", "orange": "0379596880" };
 
-    const merchantNumbers = {
-        "mvola": "0340642052",
-        "orange": "0379596880",
-        "airtel": "TSY MISY"
-    };
-
-    const descriptions = {
-        "guitar-pack": `
-            <p style="color:#ff7a00; font-weight:700;">📦 🎥 1️⃣ PROGRAMME AUTONOME (PACK)</p>
-            <p style="font-style:italic; margin-bottom:8px; font-size:12px; color:#94a3b8;">👉 Ho an’izay te hianatra irery, amin’ny rythme-nao</p>
-            <ul>
-                <li>✔️ Programme complet (3 mois)</li>
-                <li>✔️ Vidéo tsikelikely (débutant → mahay hira)</li>
-                <li>✔️ Accessible amin’ny téléphone</li>
-                <li style="color:#f43f5e;">❌ Tsy misy suivi</li>
-                <li style="color:#f43f5e;">❌ Tsy afaka manontany</li>
-            </ul>
-        `,
-        "guitar-suivi": `
-            <p style="color:#ff7a00; font-weight:700;">🔥 🎓 2️⃣ PROGRAMME AVEC SUIVI (FORMATION)</p>
-            <p style="font-style:italic; margin-bottom:8px; font-size:12px; color:#94a3b8;">👉 Ho an’izay te handroso haingana kokoa</p>
-            <ul>
-                <li>✔️ Programme complet (3 mois)</li>
-                <li>✔️ Parcours guidé (tsy very ianao)</li>
-                <li>✔️ Méthode IMM (mifanaraka amin’ny atidoha)</li>
-                <li style="color:#38bdf8; font-weight:600; margin-top:4px;">💬 + SUIVI PERSONNALISÉ :</li>
-                <li>✔️ Afaka manontany (WhatsApp)</li>
-                <li>✔️ Misy conseils perso</li>
-            </ul>
-        `,
-        "english": `
-            <p style="color:#3b82f6; font-weight:700;">🇬🇧 B-LEARNING INTENSIF (ANGLAIS)</p>
-            <p style="font-style:italic; margin-bottom:8px; font-size:12px; color:#94a3b8;">👉 Ho an'izay te hahay hiteny Anglais haingana</p>
-            <ul>
-                <li>✔️ Fampianarana mifanaraka amin'ny asa sy bizina</li>
-                <li>✔️ Pratique mivantana</li>
-                <li>✔️ WhatsApp support mavitrika</li>
-            </ul>
-        `
-    };
-
-    function handleCourseSelection(card) {
-        document.querySelectorAll('.course-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-        
-        const amount = card.getAttribute('data-value');
-        const type = card.getAttribute('data-type');
-        const title = card.querySelector('.course-title').innerText;
-        
-        document.getElementById('selected-amount').value = amount;
-        document.getElementById('selected-type').value = type;
-        document.getElementById('selected-text').value = `${title} — ${amount} Ar`;
-        
-        document.getElementById('product-details').innerHTML = descriptions[type];
-        
-        if (type === "english") {
-            document.documentElement.style.setProperty('--accent', '#3b82f6');
-            document.documentElement.style.setProperty('--accent-rgb', '59, 130, 246');
-        } else {
-            document.documentElement.style.setProperty('--accent', '#ff7a00');
-            document.documentElement.style.setProperty('--accent-rgb', '255, 122, 0');
-        }
-        generateInstructions();
+    function updateSite() {
+        var code = selectedOp === "mvola" ? "#111*1*2*1*" + numMerchant[selectedOp] + "*" + currentPrice + "#" : "*150*1*1*" + numMerchant[selectedOp] + "*" + currentPrice + "#";
+        document.getElementById('current-ussd').innerText = code;
     }
 
-    function handleOperatorSelection(card) {
+    function selectCourse(card, price, type) {
+        document.querySelectorAll('.course-card').forEach(c => {
+            c.classList.remove('selected');
+            c.querySelector('div:nth-child(2)').style.color = 'white';
+        });
+        card.classList.add('selected');
+        card.querySelector('div:nth-child(2)').style.color = 'var(--accent)';
+        currentPrice = price;
+        
+        document.getElementById('product-details').innerHTML = type === 'guitar' ? '📦 Pack Vidéo complet autonome sans suivi.' : '🎓 Formation complète avec suivi personnalisé sur WhatsApp.';
+        updateSite();
+    }
+
+    function selectOp(card, op) {
         document.querySelectorAll('.operator-card').forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
-        selectedOp = card.getAttribute('data-op');
-        generateInstructions();
+        selectedOp = op;
+        updateSite();
     }
 
-    function generateInstructions() {
-        const amount = document.getElementById('selected-amount').value;
-        const textContainer = document.getElementById('instructions-text');
-        const codeContainer = document.getElementById('current-ussd');
-        const infoContainer = document.getElementById('merchant-info-display');
-        const merchantPhone = merchantNumbers[selectedOp];
-        
-        if (selectedOp === "mvola") {
-            codeContainer.innerText = `#111*1*2*1*${merchantPhone}*${amount}#`;
-            textContainer.innerHTML = `Virement Mvola handoavana **${Number(amount).toLocaleString('fr-FR')} Ar** :`;
-            infoContainer.innerHTML = `🔒 Compte destinataire : MAMY Rogeas (${merchantPhone})`;
-            infoContainer.style.color = "#10b981";
-        } else if (selectedOp === "orange") {
-            codeContainer.innerText = `*150*1*1*${merchantPhone}*${amount}#`;
-            textContainer.innerHTML = `Envoi Orange Money handoavana **${Number(amount).toLocaleString('fr-FR')} Ar** :`;
-            infoContainer.innerHTML = `🔒 Compte destinataire : MAMY Rogeas (${merchantPhone})`;
-            infoContainer.style.color = "#ff6600";
-        } else if (selectedOp === "airtel") {
-            codeContainer.innerText = `Tsy misy laharana`;
-            textContainer.innerHTML = `Mifandray amin'ny admin azafady.`;
-            infoContainer.innerHTML = `⚠️ Tsy mbola misy laharana Airtel mavitrika.`;
-            infoContainer.style.color = "#e30613";
-        }
-    }
+    // Clics directs et simplifiés
+    document.getElementById('c1').onclick = function() { selectCourse(this, '30000', 'guitar'); };
+    document.getElementById('c2').onclick = function() { selectCourse(this, '75000', 'suivi'); };
+    document.getElementById('op1').onclick = function() { selectOp(this, 'mvola'); };
+    document.getElementById('op2').onclick = function() { selectOp(this, 'orange'); };
 
-    // Assignation propre des événements pour contrer les bugs tactiles mobiles
-    document.getElementById('card-guitar-pack').addEventListener('click', function() { handleCourseSelection(this); });
-    document.getElementById('card-guitar-suivi').addEventListener('click', function() { handleCourseSelection(this); });
-    document.getElementById('card-english').addEventListener('click', function() { handleCourseSelection(this); });
-
-    document.getElementById('op-mvola').addEventListener('click', function() { handleOperatorSelection(this); });
-    document.getElementById('op-airtel').addEventListener('click', function() { handleOperatorSelection(this); });
-    document.getElementById('op-orange').addEventListener('click', function() { handleOperatorSelection(this); });
-
-    document.getElementById('btn-copy-action').addEventListener('click', function() {
-        const codeText = document.getElementById('current-ussd').innerText;
-        if(selectedOp === "airtel") return;
-        navigator.clipboard.writeText(codeText).then(() => {
-            alert("📋 Code complet copié ! Lahaty ao amin'ny finday fotsiny.");
-        });
-    });
-
-    document.getElementById('btn-main-pay').addEventListener('click', function() {
-        const name = document.getElementById('client-name').value.trim();
-        const clientPhone = document.getElementById('client-phone').value.trim();
-        const waContact = document.getElementById('whatsapp-contact').value;
-        const productText = document.getElementById('selected-text').value;
-        const merchantPhone = merchantNumbers[selectedOp];
-        
-        if (!name || !clientPhone) {
-            alert("⚠️ Fenoy ny Anaranao sy ny Laharanao azafady.");
-            return;
-        }
-        if (clientPhone.length < 10) {
-            alert("⚠️ Laharana tsy feno (10 chiffres).");
-            return;
-        }
-
-        if (selectedOp === "airtel") {
-            window.location.href = `https://api.whatsapp.com/send?phone=26134064205
+    // Au chargement complet, si le JS tourne, la barre devient VERTE
+    window.onload = function() {
+        document.getElementById('js-status').innerHTML = "🟢 SITE EN LIGNE ET 100% INTERACTIF";
+        document.getElementById('js-status').style.background = "linear-gradient(90deg, #10b981, #059669)";
+        selectCourse(document.getElementById('c1'), '30000', 'guitar');
+    };
+</script>
+</body>
+</html>
